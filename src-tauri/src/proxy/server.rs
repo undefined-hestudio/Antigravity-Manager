@@ -1,6 +1,7 @@
 use crate::proxy::TokenManager;
 use axum::{
     extract::DefaultBodyLimit,
+    http::StatusCode,
     response::{IntoResponse, Json, Response},
     routing::{any, get, post},
     Router,
@@ -29,6 +30,7 @@ pub struct AppState {
     pub zai: Arc<RwLock<crate::proxy::ZaiConfig>>,
     pub provider_rr: Arc<AtomicUsize>,
     pub zai_vision_mcp: Arc<crate::proxy::zai_vision_mcp::ZaiVisionMcpState>,
+    pub monitor: Arc<crate::proxy::monitor::ProxyMonitor>,
 }
 
 /// Axum 服务器实例
@@ -89,6 +91,8 @@ impl AxumServer {
         upstream_proxy: crate::proxy::config::UpstreamProxyConfig,
         security_config: crate::proxy::ProxySecurityConfig,
         zai_config: crate::proxy::ZaiConfig,
+        monitor: Arc<crate::proxy::monitor::ProxyMonitor>,
+
     ) -> Result<(Self, tokio::task::JoinHandle<()>), String> {
         let mapping_state = Arc::new(tokio::sync::RwLock::new(anthropic_mapping));
         let openai_mapping_state = Arc::new(tokio::sync::RwLock::new(openai_mapping));
@@ -112,11 +116,13 @@ impl AxumServer {
             upstream_proxy: proxy_state.clone(),
             upstream: Arc::new(crate::proxy::upstream::client::UpstreamClient::new(Some(
                 upstream_proxy.clone(),
-	            ))),
-	            zai: zai_state.clone(),
-	            provider_rr: provider_rr.clone(),
-	            zai_vision_mcp: zai_vision_mcp_state,
-	        };
+            ))),
+            zai: zai_state.clone(),
+            provider_rr: provider_rr.clone(),
+            zai_vision_mcp: zai_vision_mcp_state,
+            monitor: monitor.clone(),
+        };
+
 
         // 构建路由 - 使用新架构的 handlers！
         use crate::proxy::handlers;
@@ -175,8 +181,11 @@ impl AxumServer {
                 "/v1beta/models/:model/countTokens",
                 post(handlers::gemini::handle_count_tokens),
             ) // Specific route priority
+            .route("/v1/api/event_logging/batch", post(silent_ok_handler))
+            .route("/v1/api/event_logging", post(silent_ok_handler))
             .route("/healthz", get(health_check_handler))
             .layer(DefaultBodyLimit::max(100 * 1024 * 1024))
+            .layer(axum::middleware::from_fn_with_state(state.clone(), crate::proxy::middleware::monitor::monitor_middleware))
             .layer(TraceLayer::new_for_http())
             .layer(axum::middleware::from_fn_with_state(
                 security_state.clone(),
@@ -262,4 +271,9 @@ async fn health_check_handler() -> Response {
         "status": "ok"
     }))
     .into_response()
+}
+
+/// 静默成功处理器 (用于拦截遥测日志等)
+async fn silent_ok_handler() -> Response {
+    StatusCode::OK.into_response()
 }

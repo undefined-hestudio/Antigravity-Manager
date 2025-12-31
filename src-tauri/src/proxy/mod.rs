@@ -16,6 +16,8 @@ pub mod common;            // 公共工具
 pub mod providers;         // Extra upstream providers (z.ai, etc.)
 pub mod zai_vision_mcp;    // Built-in Vision MCP server state
 pub mod zai_vision_tools;  // Built-in Vision MCP tools (z.ai vision API)
+pub mod monitor;           // 监控
+
 
 pub use config::ProxyConfig;
 pub use config::ProxyAuthMode;

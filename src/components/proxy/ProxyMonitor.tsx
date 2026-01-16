@@ -258,7 +258,9 @@ export const ProxyMonitor: React.FC<ProxyMonitorProps> = ({ className }) => {
                 updateTimeout = setTimeout(() => {
                     const currentPending = pendingLogsRef.current;
                     if (currentPending.length > 0) {
-                        setLogs(prev => [...currentPending, ...prev].slice(0, 100)); // 1000 → 100
+                        // Sort pending logs by timestamp descending (newest first)
+                        const sortedPending = [...currentPending].sort((a, b) => b.timestamp - a.timestamp);
+                        setLogs(prev => [...sortedPending, ...prev].slice(0, 100));
 
                         // 批量更新统计
                         setStats((prev: ProxyStats) => {

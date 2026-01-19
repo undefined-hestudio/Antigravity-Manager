@@ -537,7 +537,12 @@
                 "max_wait": "Max Wait (sec)",
                 "max_wait_tooltip": "Only used in 'Cache First' mode: wait instead of switching if the rate limit reset time is below this value.",
                 "clear_bindings": "Clear Session Bindings",
-                "clear_bindings_tooltip": "Hard reset all session-account bindings, forcing accounts to be re-assigned on next request."
+                "clear_bindings_tooltip": "Hard reset all session-account bindings, forcing accounts to be re-assigned on next request.",
+                "fixed_account": "Fixed Account Mode",
+                "fixed_account_tooltip": "When enabled, all API requests will use only the selected account instead of rotating between accounts.",
+                "round_robin_set": "Round-robin mode enabled",
+                "fixed_account_set": "Fixed account mode enabled",
+                "account_changed": "Account changed to: {{email}}"
             },
             "experimental": {
                 "title": "Experimental Settings",

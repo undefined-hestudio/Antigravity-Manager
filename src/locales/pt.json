@@ -532,6 +532,11 @@
                 "max_wait": "Tempo Máximo de Espera (seg)",
                 "max_wait_tooltip": "Usado apenas no modo 'Cache Primeiro': aguardar em vez de alternar se o tempo de reset do limite de taxa estiver abaixo deste valor.",
                 "clear_bindings": "Limpar Vinculações de Sessão",
+                "fixed_account": "Modo de Conta Fixa",
+                "fixed_account_tooltip": "Quando ativado, todos os pedidos de API utilizarão apenas a conta selecionada, em vez de alternar entre contas.",
+                "round_robin_set": "Modo round-robin ativado",
+                "fixed_account_set": "Modo de conta fixa ativado",
+                "account_changed": "Conta alterada para: {{email}}",
                 "clear_bindings_tooltip": "Redefinir todas as vinculações sessão-conta, forçando contas a serem reatribuídas na próxima solicitação."
             },
             "experimental": {

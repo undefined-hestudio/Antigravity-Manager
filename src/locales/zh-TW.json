@@ -532,7 +532,12 @@
                 "max_wait": "最大等待時長 (秒)",
                 "max_wait_tooltip": "僅在“快取優先”模式下生效：如果帳號限流重置時間小於此值，則原地等待而非切換帳號。",
                 "clear_bindings": "清除會話繫結",
-                "clear_bindings_tooltip": "立即斷開所有會話與帳號的繫結關係，強制下一次請求重新分配帳號。"
+                "clear_bindings_tooltip": "立即斷開所有會話與帳號的繫結關係，強制下一次請求重新分配帳號。",
+                "fixed_account": "固定帳戶模式",
+                "fixed_account_tooltip": "啟用後，所有 API 請求將只使用所選帳戶，而不會在帳戶之間輪換。",
+                "round_robin_set": "輪詢模式已啟用",
+                "fixed_account_set": "固定帳戶模式已啟用",
+                "account_changed": "帳戶已變更為：{{email}}"
             },
             "experimental": {
                 "title": "實驗性設定 (Experimental)",

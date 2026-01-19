@@ -1,5 +1,5 @@
 # Antigravity Tools 🚀
-> 专业的 AI 账号管理与协议反代系统 (v3.3.44)
+> 专业的 AI 账号管理与协议反代系统 (v3.3.45)
 <div align="center">
   <img src="public/icon.png" alt="Antigravity Logo" width="120" height="120" style="border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
 
@@ -8,7 +8,7 @@
   
   <p>
     <a href="https://github.com/lbjlaq/Antigravity-Manager">
-      <img src="https://img.shields.io/badge/Version-3.3.44-blue?style=flat-square" alt="Version">
+      <img src="https://img.shields.io/badge/Version-3.3.45-blue?style=flat-square" alt="Version">
     </a>
     <img src="https://img.shields.io/badge/Tauri-v2-orange?style=flat-square" alt="Tauri">
     <img src="https://img.shields.io/badge/Backend-Rust-red?style=flat-square" alt="Rust">
@@ -205,6 +205,15 @@ print(response.choices[0].message.content)
 ## 📝 开发者与社区
 
 *   **版本演进 (Changelog)**:
+    *   **v3.3.45 (2026-01-19)**:
+        - **[核心功能] 固定账号模式集成 (PR #842)**:
+            - **后端增强**: 在代理核心中引入了 `preferred_account_id` 支持，允许通过 API 或 UI 强制锁定特定账号进行请求调度。
+            - **UI 交互更新**: 在 API 反代页面新增“固定账号”切换与账号选择器，支持实时锁定当前会话的出口账号。
+            - **调度优化**: 在“固定账号模式”下优先级高于传统轮询，确保特定业务场景下的会话连续性。
+        - **[国际化] 全语言翻译补全与清理**:
+            - **8 语言覆盖**: 补全了中、英、繁中、日、土、越、葡、俄等 8 种语言中关于“固定账号模式”的所有 i18n 翻译项。
+            - **冗余清理**: 修复了 `ja.json` 和 `vi.json` 中由于历史 PR 累积导致的重复键（Duplicate Keys）警告，提升了翻译规范性。
+            - **标点同步**: 统一清除了各语言翻译中误用的全角标点，确保 UI 展示的一致性。
     *   **v3.3.44 (2026-01-19)**:
         - **[核心稳定性] 动态思维剥离 (Dynamic Thinking Stripping) - 彻底解决 Prompt 过长与签名错误**:
             - **问题背景**: 在 Deep Thinking 模式下,长对话会导致两类致命错误:

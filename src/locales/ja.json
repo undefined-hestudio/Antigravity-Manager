@@ -255,7 +255,6 @@
             "warmup_all_msg": "対象となるすべてのアカウントに対して、直ちにウォームアップタスクを開始してもよろしいですか？これにより、Googleサービスへの最小限のトラフィックが送信され、クォータサイクルがリセットされます。",
             "warmup_all_title": "完全手動ウォームアップ"
         },
-        "device_fingerprint": "デバイス指紋",
         "import_fail": "インポートに失敗しました: {{error}}",
         "import_invalid_format": "無効なJSON形式です。ファイルにemailとrefresh_tokenフィールドが含まれていることを確認してください",
         "import_json": "インポート",
@@ -548,7 +547,12 @@
                 "max_wait": "最大待機時間 (秒)",
                 "max_wait_tooltip": "「キャッシュ優先」モードでのみ使用: レートリミットのリセット時間がこの値以下の場合、切り替えずに待機します。",
                 "clear_bindings": "セッションバインディングをクリア",
-                "clear_bindings_tooltip": "すべてのセッションとアカウントの紐付けを強制リセットし、次のリクエストでアカウントを再割り当てします。"
+                "clear_bindings_tooltip": "すべてのセッションとアカウントの紐付けを強制リセットし、次のリクエストでアカウントを再割り当てします。",
+                "fixed_account": "固定アカウントモード",
+                "fixed_account_tooltip": "有効にすると、すべてのAPIリクエストは、アカウントを切り替える代わりに、選択されたアカウントのみを使用します。",
+                "round_robin_set": "ラウンドロビンモードが有効",
+                "fixed_account_set": "固定アカウントモードが有効",
+                "account_changed": "アカウントが次へ変更されました：{{email}}"
             },
             "experimental": {
                 "title": "実験設定 (Experimental)",
